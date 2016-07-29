@@ -4,8 +4,8 @@ AWS Lambda function to parse S3 server log files and export
 metrics to AWS CloudWatch.
 
 - [Description](#description)
-- [Deployment](#deployment)
 - [Extra S3 Metrics available](#metrics-available)
+- [Deployment](#deployment)
 - [FAQ](#faq)
 - [Contributing](#contributing)
 - [License](#license)
@@ -34,68 +34,6 @@ transfer for access to delivered log files).
 To find out more about Server Access Logging feature of S3, head over to [Server
 Access Logging](http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html)
 section in Amazon Simple Storage Service Developer Guide.
-
-<a name="deployment"/>
-## Deployment
-
-Follow below steps to enable CloudWatch metrics for bucket
-`com-companyname-mybucket`.
-
-1. Create a new S3 bucket for storing your S3 logs, for example
-`com-companyname-s3logs`
-
-2. Enable logging on `com-companyname-mybucket` bucket
-   
-   For information on how to enable bucket logging, see [Enabling Logging
-   Using the Console]
-   (http://docs.aws.amazon.com/AmazonS3/latest/dev/enable-logging-console.html).
-   
-   IMPORTANT: Set `com-companyname-s3logs` as **Target Bucket** for log
-   objects. Specify `com-companyname-mybucket/` as **Target
-   Prefix**. **Target Prefix** value must end with a `/` for s3logs-cloudwatch
-   Lambda function to properly set BucketName dimension in exported
-   CloudWatch metrics
-
-   ![bucket_setup](https://cloud.githubusercontent.com/assets/1117361/16656578/86f57a32-445f-11e6-8e5f-574c19d398cb.png)
-
-3. Clone this GitHub repository so you have it locally and prepare deployment
-package. Upload deployment package to S3.
-
-   ```bash
-   $ git clone git@github.com:maginetv/s3logs-cloudwatch.git
-   $ cd s3logs-cloudwatch/
-   ```
-   
-   Edit `configuration.ini` file if you would like to adjust the settings or
-   change which metrics will be exported to CloudWatch.
-   Then zip the files and put resulting zip somewhere on S3.
-
-   ```bash
-   $ zip s3logs-cloudwatch.zip lambda_function.py configuration.ini
-   $ s3cmd cp s3logs-cloudwatch.zip s3://com-companyname-packages/lambda/s3logs-cloudwatch.zip
-   ```
-   
-4. Use provided CloudFormation template to deploy s3logs-cloudwatch AWS Lambda
-function and IAM role that is required to run it.
-   
-   Go to CloudFormation in AWS Console and create the stack using provided
-   CloudFormation template `cloudformation/cloudformation-deploy.json`.
-
-   ![cloudformation_setup](https://cloud.githubusercontent.com/assets/1117361/16657289/419fb148-4462-11e6-95d8-fdb4ec82a2c8.png)
-
-5. Last step is creating and enabling triggers (event sources) for deployed
-Lambda function. Head over to AWS Lambda in AWS console and find
-`s3logs-cloudwatch` function in functions list. Deployed function is supposed
-to be run every time a new S3 log file is delivered to `com-companyname-s3logs`
-bucket. Picture below shows the configuration that has to be in place for the
-trigger to work:
-
-   ![lambda_trigger](https://cloud.githubusercontent.com/assets/1117361/16670819/80e33368-449c-11e6-85e2-d2bdb09f2661.png)
-
-   If you need to enable s3logs-cloudwatch to graph S3 metrics from multiple S3
-   buckets just add another trigger (with different prefix/suffix setting).
-
-6. That's it. Your new Cloudwatch metrics will start appearing soon.
 
 <a name="metrics-available"/>
 ## Extra S3 Metrics available
@@ -167,6 +105,68 @@ the time the first byte of the response was sent.
 For more detailed information, head over to [Server Access Log
 Format](http://docs.aws.amazon.com/AmazonS3/latest/dev/LogFormat.html) section
 in Amazon Simple Storage Developer Guide.
+
+<a name="deployment"/>
+## Deployment
+
+Follow below steps to enable CloudWatch metrics for bucket
+`com-companyname-mybucket`.
+
+1. Create a new S3 bucket for storing your S3 logs, for example
+`com-companyname-s3logs`
+
+2. Enable logging on `com-companyname-mybucket` bucket
+   
+   For information on how to enable bucket logging, see [Enabling Logging
+   Using the Console]
+   (http://docs.aws.amazon.com/AmazonS3/latest/dev/enable-logging-console.html).
+   
+   IMPORTANT: Set `com-companyname-s3logs` as **Target Bucket** for log
+   objects. Specify `com-companyname-mybucket/` as **Target
+   Prefix**. **Target Prefix** value must end with a `/` for s3logs-cloudwatch
+   Lambda function to properly set BucketName dimension in exported
+   CloudWatch metrics
+
+   ![bucket_setup](https://cloud.githubusercontent.com/assets/1117361/16656578/86f57a32-445f-11e6-8e5f-574c19d398cb.png)
+
+3. Clone this GitHub repository so you have it locally and prepare deployment
+package. Upload deployment package to S3.
+
+   ```bash
+   $ git clone git@github.com:maginetv/s3logs-cloudwatch.git
+   $ cd s3logs-cloudwatch/
+   ```
+   
+   Edit `configuration.ini` file if you would like to adjust the settings or
+   change which metrics will be exported to CloudWatch.
+   Then zip the files and put resulting zip somewhere on S3.
+
+   ```bash
+   $ zip s3logs-cloudwatch.zip lambda_function.py configuration.ini
+   $ s3cmd cp s3logs-cloudwatch.zip s3://com-companyname-packages/lambda/s3logs-cloudwatch.zip
+   ```
+   
+4. Use provided CloudFormation template to deploy s3logs-cloudwatch AWS Lambda
+function and IAM role that is required to run it.
+   
+   Go to CloudFormation in AWS Console and create the stack using provided
+   CloudFormation template `cloudformation/cloudformation-deploy.json`.
+
+   ![cloudformation_setup](https://cloud.githubusercontent.com/assets/1117361/16657289/419fb148-4462-11e6-95d8-fdb4ec82a2c8.png)
+
+5. Last step is creating and enabling triggers (event sources) for deployed
+Lambda function. Head over to AWS Lambda in AWS console and find
+`s3logs-cloudwatch` function in functions list. Deployed function is supposed
+to be run every time a new S3 log file is delivered to `com-companyname-s3logs`
+bucket. Picture below shows the configuration that has to be in place for the
+trigger to work:
+
+   ![lambda_trigger](https://cloud.githubusercontent.com/assets/1117361/16670819/80e33368-449c-11e6-85e2-d2bdb09f2661.png)
+
+   If you need to enable s3logs-cloudwatch to graph S3 metrics from multiple S3
+   buckets just add another trigger (with different prefix/suffix setting).
+
+6. That's it. Your new Cloudwatch metrics will start appearing soon.
 
 <a name="faq"/>
 ## FAQ
