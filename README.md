@@ -17,7 +17,7 @@ metrics to AWS CloudWatch.
 This AWS Lambda function will analyze and aggregate your S3 Server Access log
 files and graph extra metrics in AWS CloudWatch.
 
-![metrics_example](https://cloud.githubusercontent.com/assets/1117361/16660562/278f0e04-446f-11e6-8844-cb4a598ace5a.png)
+![metrics_example](https://cloud.githubusercontent.com/assets/1117361/17244194/ee594280-5580-11e6-8879-7acd3f6519b8.png)
 
 AWS S3 is a managed storage service. The only metrics available
 in AWS CloudWatch for S3 are `NumberOfObjects` and `BucketSizeBytes`. In order
@@ -127,7 +127,7 @@ Follow below steps to enable CloudWatch metrics for bucket
    Lambda function to properly set BucketName dimension in exported
    CloudWatch metrics
 
-   ![bucket_setup](https://cloud.githubusercontent.com/assets/1117361/16656578/86f57a32-445f-11e6-8e5f-574c19d398cb.png)
+   ![bucket_setup](https://cloud.githubusercontent.com/assets/1117361/17244192/ee581efa-5580-11e6-9b23-5e86783a73a8.png)
 
 3. Clone this GitHub repository so you have it locally and prepare deployment
 package. Upload deployment package to S3.
@@ -152,7 +152,7 @@ function and IAM role that is required to run it.
    Go to CloudFormation in AWS Console and create the stack using provided
    CloudFormation template `cloudformation/cloudformation-deploy.json`.
 
-   ![cloudformation_setup](https://cloud.githubusercontent.com/assets/1117361/16657289/419fb148-4462-11e6-95d8-fdb4ec82a2c8.png)
+   ![cloudformation_setup](https://cloud.githubusercontent.com/assets/1117361/17244195/ee5d3750-5580-11e6-955e-c8cdf1adde76.png)
 
 5. Last step is creating and enabling triggers (event sources) for deployed
 Lambda function. Head over to AWS Lambda in AWS console and find
@@ -161,7 +161,7 @@ to be run every time a new S3 log file is delivered to `com-companyname-s3logs`
 bucket. Picture below shows the configuration that has to be in place for the
 trigger to work:
 
-   ![lambda_trigger](https://cloud.githubusercontent.com/assets/1117361/16670819/80e33368-449c-11e6-85e2-d2bdb09f2661.png)
+   ![lambda_trigger](https://cloud.githubusercontent.com/assets/1117361/17244193/ee58459c-5580-11e6-9241-90f8aafc2636.png)
 
    If you need to enable s3logs-cloudwatch to graph S3 metrics from multiple S3
    buckets just add another trigger (with different prefix/suffix setting).
