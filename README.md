@@ -62,7 +62,7 @@ Follow below steps to enable CloudWatch metrics for bucket
 package. Upload deployment package to S3.
 
    ```bash
-   $ git clone git@github.com:tvoli/s3logs-cloudwatch.git
+   $ git clone git@github.com:maginetv/s3logs-cloudwatch.git
    $ cd s3logs-cloudwatch/
    ```
    
