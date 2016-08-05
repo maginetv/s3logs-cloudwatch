@@ -83,7 +83,7 @@ METRICS_CONFIG = [
 ]
 
 for mc in METRICS_CONFIG:
-    for x in ('RequestCount', 'TotalRequestTime', 'TurnAroundTime', 'BytesSent'):
+    for x in ('RequestCount', 'TotalRequestTime', 'TurnAroundTime', 'ObjectSize'):
         if CONFIG.has_option('metrics_enabled', '{}_{}'.format(mc['MetricNamePrefix'], x)):
             mc[x] = CONFIG.getboolean(
                 'metrics_enabled', '{}_{}'.format(mc['MetricNamePrefix'], x)
@@ -278,10 +278,10 @@ def lambda_handler(event, context):
                     value=value,
                 )
 
-            if (mc.get('BytesSent') is not None and
-                datapoint['BYTES_SENT'].isdigit()):
-                metric_name_suffix = 'BytesSent'
-                value = int(datapoint['BYTES_SENT'])
+            if (mc.get('ObjectSize') is not None and
+                datapoint['OBJECT_SIZE'].isdigit()):
+                metric_name_suffix = 'ObjectSize'
+                value = int(datapoint['ObjectSize'])
                 cwrb.add_metric_datapoint(
                     metric_name="_".join(
                         [mc['MetricNamePrefix'], metric_name_suffix]
