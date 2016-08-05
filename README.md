@@ -69,6 +69,7 @@ To enable or disable specific metric edit `configuration.ini` file.
 |RestGetObject_HTTP_2XX_RequestCount                 | on
 |RestGetObject_HTTP_2XX_TotalRequestTime             | off
 |RestGetObject_HTTP_2XX_TurnAroundTime               | off
+|RestGetObject_HTTP_2XX_ObjectSize                   | on
 |RestGetObject_HTTP_4XX_RequestCount                 | on
 |RestGetObject_HTTP_4XX_TotalRequestTime             | off
 |RestGetObject_HTTP_4XX_TurnAroundTime               | off
@@ -78,6 +79,7 @@ To enable or disable specific metric edit `configuration.ini` file.
 |RestPutObject_HTTP_2XX_RequestCount                 | on
 |RestPutObject_HTTP_2XX_TotalRequestTime             | off
 |RestPutObject_HTTP_2XX_TurnAroundTime               | off
+|RestPutObject_HTTP_2XX_ObjectSize                   | on
 |RestPutObject_HTTP_4XX_RequestCount                 | on
 |RestPutObject_HTTP_4XX_TotalRequestTime             | off
 |RestPutObject_HTTP_4XX_TurnAroundTime               | off
