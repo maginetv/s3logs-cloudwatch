@@ -278,6 +278,19 @@ def lambda_handler(event, context):
                     value=value,
                 )
 
+            if (mc.get('BytesSent') is not None and
+                datapoint['BYTES_SENT'].isdigit()):
+                metric_name_suffix = 'BytesSent'
+                value = int(datapoint['BYTES_SENT'])
+                cwrb.add_metric_datapoint(
+                    metric_name="_".join(
+                        [mc['MetricNamePrefix'], metric_name_suffix]
+                    ),
+                    timestamp_iso=timestamp_iso,
+                    unit='Bytes',
+                    value=value,
+                )
+
     cwrb.flush()
 
     cwrb2 = CloudWatchMetricsBuffer(
