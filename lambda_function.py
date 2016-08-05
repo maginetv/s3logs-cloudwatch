@@ -83,11 +83,11 @@ METRICS_CONFIG = [
 ]
 
 for mc in METRICS_CONFIG:
-    for x in ('RequestCount', 'TotalRequestTime', 'TurnAroundTime'):
-        mc[x] = CONFIG.getboolean(
-            'metrics_enabled',
-            '{}_{}'.format(mc['MetricNamePrefix'], x)
-        )
+    for x in ('RequestCount', 'TotalRequestTime', 'TurnAroundTime', 'BytesSent'):
+        if CONFIG.has_option('metrics_enabled', '{}_{}'.format(mc['MetricNamePrefix'], x)):
+            mc[x] = CONFIG.getboolean(
+                'metrics_enabled', '{}_{}'.format(mc['MetricNamePrefix'], x)
+            )
 
 
 def round_time(dt=None, round_to=60):
