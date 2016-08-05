@@ -108,6 +108,10 @@ For more detailed information, head over to [Server Access Log
 Format](http://docs.aws.amazon.com/AmazonS3/latest/dev/LogFormat.html) section
 in Amazon Simple Storage Developer Guide.
 
+**ObjectSize**
+
+The total size of the object in question.
+
 <a name="deployment"/>
 ## Deployment
 
