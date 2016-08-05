@@ -281,7 +281,7 @@ def lambda_handler(event, context):
             if (mc.get('ObjectSize') is not None and
                 datapoint['OBJECT_SIZE'].isdigit()):
                 metric_name_suffix = 'ObjectSize'
-                value = int(datapoint['ObjectSize'])
+                value = int(datapoint['OBJECT_SIZE'])
                 cwrb.add_metric_datapoint(
                     metric_name="_".join(
                         [mc['MetricNamePrefix'], metric_name_suffix]
