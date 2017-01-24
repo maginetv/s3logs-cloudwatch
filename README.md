@@ -17,7 +17,7 @@ metrics to AWS CloudWatch.
 This AWS Lambda function will analyze and aggregate your S3 Server Access log
 files and graph extra metrics in AWS CloudWatch.
 
-**NOTE:** AWS introduced S3 request metrics at re:Invent 2016. This makes parts of below README outdated as of December 2016 and it might not be the most optimal way of achieving your goals. Before reading further please check out AWS documentation: [S3 Request Metrics](http://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html). There are still extra metrics provided by s3logs-cloudwatch (more granular) that the "official way" does not provide.
+**NOTE:** AWS introduced S3 request metrics at re:Invent 2016. This makes parts of below README outdated as of December 2016 and it might not be the most optimal way of achieving your goals. Before reading further please check out AWS documentation: [S3 Request Metrics](http://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html). There are still extra, more specific metrics provided by s3logs-cloudwatch that the "official way" does not provide.
 
 ![metrics_example](https://cloud.githubusercontent.com/assets/1117361/17244194/ee594280-5580-11e6-8879-7acd3f6519b8.png)
 
