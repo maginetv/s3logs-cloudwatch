@@ -11,8 +11,8 @@ metrics to AWS CloudWatch.
 - [License](#license)
 - [Author](#author)
 
-<a name="description"/>
 ## Description
+<a name="description"/>
 
 This AWS Lambda function will analyze and aggregate your S3 Server Access log
 files and graph extra metrics in AWS CloudWatch.
@@ -37,8 +37,8 @@ To find out more about Server Access Logging feature of S3, head over to [Server
 Access Logging](http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html)
 section in Amazon Simple Storage Service Developer Guide.
 
-<a name="metrics-available"/>
 ## Extra S3 Metrics available
+<a name="metrics-available"/>
 
 Custom metrics are sent to AWS CloudWatch under the namespace `S3 Logs`.
 You can choose a different namespace name in `configuration.ini` file. Each
@@ -114,8 +114,8 @@ in Amazon Simple Storage Developer Guide.
 
 The total size of the object in question.
 
-<a name="deployment"/>
 ## Deployment
+<a name="deployment"/>
 
 Follow below steps to enable CloudWatch metrics for bucket
 `com-companyname-mybucket`.
@@ -176,8 +176,8 @@ trigger to work:
 
 6. That's it. Your new Cloudwatch metrics will start appearing soon.
 
-<a name="faq"/>
 ## FAQ
+<a name="faq"/>
 
 **Q: I don't see metrics in Cloudwatch from the last hour, why?**
 
@@ -205,8 +205,8 @@ certain period (for example 1 or 7 days). Check [Object Lifecycle Management]
 Amazon S3 Developer Guide.
 
 
-<a name="contributing"/>
 ## Contributing
+<a name="contributing"/>
 
 Pull requests are very welcome if you feel like you would like to improve
 or add any functionality. In order to contribute:
@@ -215,8 +215,8 @@ or add any functionality. In order to contribute:
 - Create your own topic branch
 - Once finished, submit a pull request
 
-<a name="license"/>
 ## License
+<a name="license"/>
 
 Released under the [Apache 2.0 license](LICENSE).
 
@@ -236,7 +236,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-<a name="author"/>
 ## Author
+<a name="author"/>
 
 Michal Gasek (michal.gasek at magine/com)
