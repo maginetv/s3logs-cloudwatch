@@ -1,7 +1,6 @@
 # s3logs-cloudwatch
 
-AWS Lambda function to parse S3 server log files and export
-metrics to AWS CloudWatch.
+AWS Lambda function to parse S3 server log files and export metrics to AWS CloudWatch.
 
 - [Description](#description)
 - [Extra S3 Metrics available](#metrics-available)
@@ -14,80 +13,65 @@ metrics to AWS CloudWatch.
 ## Description
 <a name="description"/>
 
-This AWS Lambda function will analyze and aggregate your S3 Server Access log
-files and graph extra metrics in AWS CloudWatch.
+This AWS Lambda function will analyze and aggregate your S3 Server Access log files and graph extra metrics in AWS CloudWatch.
 
 **NOTE:** AWS introduced S3 request metrics at re:Invent 2016. This makes parts of below README outdated as of December 2016 and it might not be the most optimal way of achieving your goals. Before reading further please check out AWS documentation: [S3 Request Metrics](http://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html). There are still extra, more specific metrics provided by s3logs-cloudwatch that the "official way" does not provide.
 
 ![metrics_example](https://cloud.githubusercontent.com/assets/1117361/17244194/ee594280-5580-11e6-8879-7acd3f6519b8.png)
 
-AWS S3 is a managed storage service. The only metrics available
-in AWS CloudWatch for S3 are `NumberOfObjects` and `BucketSizeBytes`. In order
-to understand your S3 usage better you need to do some extra work. Reasons can
-be multiple: understanding your AWS bill, getting better idea of how your
-deployed applications use S3, access auditing, security, performance
-considerations or proactive monitoring because you love metrics.
+AWS S3 is a managed storage service. The only metrics available in AWS CloudWatch for S3 are `NumberOfObjects` and `BucketSizeBytes`. In order to understand your S3 usage better you need to do some extra work. Reasons can be multiple: understanding your AWS bill, getting better idea of how your deployed applications use S3, access auditing, security, performance considerations or proactive monitoring because you love metrics.
 
-AWS offers server access logging to track requests for access to your bucket.
-This is a feature that is disabled by default, but you can enable it free
-of charge (you will be charged for storage used for storing files and data
-transfer for access to delivered log files).
+AWS offers server access logging to track requests for access to your bucket. This is a feature that is disabled by default, but you can enable it free of charge (you will be charged for storage used for storing files and data transfer for access to delivered log files).
 
-To find out more about Server Access Logging feature of S3, head over to [Server
-Access Logging](http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html)
-section in Amazon Simple Storage Service Developer Guide.
+To find out more about Server Access Logging feature of S3, head over to [Server Access Logging](http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) section in Amazon Simple Storage Service Developer Guide.
 
 ## Extra S3 Metrics available
 <a name="metrics-available"/>
 
-Custom metrics are sent to AWS CloudWatch under the namespace `S3 Logs`.
-You can choose a different namespace name in `configuration.ini` file. Each
-metric has a dimension `BucketName` in case you would like to enable graphing
-requests for multiple buckets.
+Custom metrics are sent to AWS CloudWatch under the namespace `S3 Logs`. You can choose a different namespace name in `configuration.ini` file. Each metric has a dimension `BucketName` in case you would like to enable graphing requests for multiple buckets.
 
-Metrics enabled by default are listed below.
-To enable or disable specific metric edit `configuration.ini` file.
+Metrics enabled by default are listed below. To enable or disable specific metric edit `configuration.ini` file.
 
 | Metric name                                        | Enabled (default) |
 |:---------------------------------------------------|:-----------------:|
-|AllReqs_RequestCount                                | on
-|AllReqs_TotalRequestTime                            | off
-|AllReqs_TurnAroundTime                              | off
-|RestGetObject_RequestCount                          | on
-|RestGetObject_TotalRequestTime                      | on
-|RestGetObject_TurnAroundTime                        | on
-|RestPutObject_RequestCount                          | on
-|RestPutObject_TotalRequestTime                      | on
-|RestPutObject_TurnAroundTime                        | on
-|RestHeadObject_RequestCount                         | on
-|RestHeadObject_TotalRequestTime                     | on
-|RestHeadObject_TurnAroundTime                       | off
-|BatchDeleteObject_RequestCount                      | on
-|BatchDeleteObject_TotalRequestTime                  | off
-|BatchDeleteObject_TurnAroundTime                    | off
-|RestPostMultiObjectDelete_RequestCount              | on
-|RestPostMultiObjectDelete_TotalRequestTime          | off
-|RestPostMultiObjectDelete_TurnAroundTime            | off
-|RestGetObject_HTTP_2XX_RequestCount                 | on
-|RestGetObject_HTTP_2XX_TotalRequestTime             | off
-|RestGetObject_HTTP_2XX_TurnAroundTime               | off
-|RestGetObject_HTTP_2XX_ObjectSize                   | on
-|RestGetObject_HTTP_4XX_RequestCount                 | on
-|RestGetObject_HTTP_4XX_TotalRequestTime             | off
-|RestGetObject_HTTP_4XX_TurnAroundTime               | off
-|RestGetObject_HTTP_5XX_RequestCount                 | on
-|RestGetObject_HTTP_5XX_TotalRequestTime             | off
-|RestGetObject_HTTP_5XX_TurnAroundTime               | off
-|RestPutObject_HTTP_2XX_RequestCount                 | on
-|RestPutObject_HTTP_2XX_TotalRequestTime             | off
-|RestPutObject_HTTP_2XX_TurnAroundTime               | off
-|RestPutObject_HTTP_2XX_ObjectSize                   | on
-|RestPutObject_HTTP_4XX_RequestCount                 | on
-|RestPutObject_HTTP_4XX_TotalRequestTime             | off
-|RestPutObject_HTTP_4XX_TurnAroundTime               | off
-|RestPutObject_HTTP_5XX_RequestCount                 | on
-|RestPutObject_HTTP_5XX_TotalRequestTime             | off
-|RestPutObject_HTTP_5XX_TurnAroundTime               | off
+|AllReqs_RequestCount                                | on  |
+|AllReqs_TotalRequestTime                            | off |
+|AllReqs_TurnAroundTime                              | off |
+|RestGetObject_RequestCount                          | on  |
+|RestGetObject_TotalRequestTime                      | on  |
+|RestGetObject_TurnAroundTime                        | on  |
+|RestPutObject_RequestCount                          | on  |
+|RestPutObject_TotalRequestTime                      | on  |
+|RestPutObject_TurnAroundTime                        | on  |
+|RestHeadObject_RequestCount                         | on  |
+|RestHeadObject_TotalRequestTime                     | on  |
+|RestHeadObject_TurnAroundTime                       | off |
+|BatchDeleteObject_RequestCount                      | on  |
+|BatchDeleteObject_TotalRequestTime                  | off |
+|BatchDeleteObject_TurnAroundTime                    | off |
+|RestPostMultiObjectDelete_RequestCount              | on  |
+|RestPostMultiObjectDelete_TotalRequestTime          | off |
+|RestPostMultiObjectDelete_TurnAroundTime            | off |
+|RestGetObject_HTTP_2XX_RequestCount                 | on  |
+|RestGetObject_HTTP_2XX_TotalRequestTime             | off |
+|RestGetObject_HTTP_2XX_TurnAroundTime               | off |
+|RestGetObject_HTTP_2XX_ObjectSize                   | on  |
+|RestGetObject_HTTP_4XX_RequestCount                 | on  |
+|RestGetObject_HTTP_4XX_TotalRequestTime             | off |
+|RestGetObject_HTTP_4XX_TurnAroundTime               | off |
+|RestGetObject_HTTP_5XX_RequestCount                 | on  |
+|RestGetObject_HTTP_5XX_TotalRequestTime             | off |
+|RestGetObject_HTTP_5XX_TurnAroundTime               | off |
+|RestPutObject_HTTP_2XX_RequestCount                 | on  |
+|RestPutObject_HTTP_2XX_TotalRequestTime             | off |
+|RestPutObject_HTTP_2XX_TurnAroundTime               | off |
+|RestPutObject_HTTP_2XX_ObjectSize                   | on  |
+|RestPutObject_HTTP_4XX_RequestCount                 | on  |
+|RestPutObject_HTTP_4XX_TotalRequestTime             | off |
+|RestPutObject_HTTP_4XX_TurnAroundTime               | off |
+|RestPutObject_HTTP_5XX_RequestCount                 | on  |
+|RestPutObject_HTTP_5XX_TotalRequestTime             | off |
+|RestPutObject_HTTP_5XX_TurnAroundTime               | off |
 
 **RequestCount**
 
@@ -106,8 +90,7 @@ The number of milliseconds that Amazon S3 spent processing your request. This
 value is measured from the time the last byte of your request was received until
 the time the first byte of the response was sent.
 
-For more detailed information, head over to [Server Access Log
-Format](http://docs.aws.amazon.com/AmazonS3/latest/dev/LogFormat.html) section
+For more detailed information, head over to [Server Access Log Format](http://docs.aws.amazon.com/AmazonS3/latest/dev/LogFormat.html) section
 in Amazon Simple Storage Developer Guide.
 
 **ObjectSize**
