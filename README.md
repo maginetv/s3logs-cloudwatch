@@ -153,15 +153,6 @@ A: As with everything on AWS. You pay for what you use. The monthly price of dep
 
 A: Enable S3 lifecycle rules for `com-companyname-s3logs` bucket. You can configure `com-companyname-s3logs` bucket to delete log files permanently after certain period (for example 1 or 7 days). Check [Object Lifecycle Management](http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in Amazon S3 Developer Guide.
 
-## Contributing
-<a name="contributing"/>
-
-Pull requests are very welcome if you feel like you would like to improve or add any functionality. In order to contribute:
-
-- Fork this repository on GitHub
-- Create your own topic branch
-- Once finished, submit a pull request
-
 ## License
 <a name="license"/>
 
@@ -174,6 +165,15 @@ Licensed under the Apache License, Version 2.0 (the "License"); you may not use 
    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+## Contributing
+<a name="contributing"/>
+
+Pull requests are very welcome if you feel like you would like to improve or add any functionality. In order to contribute:
+
+- Fork this repository on GitHub
+- Create your own topic branch
+- Once finished, submit a pull request
 
 ## Author
 <a name="author"/>
