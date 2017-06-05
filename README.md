@@ -149,7 +149,7 @@ A: AWS delivers log files to your logs bucket every once in a while. It's log fi
 
 A: As with everything on AWS. You pay for what you use. The monthly price of deploying this function on your AWS account will depend on: the volume of log files that need to be processed, amount of resources that you assign to s3logs-cloudwatch Lambda function and granularity od data aggregation (`round_timestamp_to_min` setting in `configuration.ini` file). s3logs-cloudwatch aims to do everything in most cost effective way possible.
 
-**Q: My logs bucket (`com-companyname-s3logs`) is growing really big, I do not need my S3 logs to be stored for such a long time because it's expensive.**
+**Q: My logs bucket is growing really big, I do not need my S3 logs to be stored for such a long time because it's expensive.**
 
 A: Enable S3 lifecycle rules for `com-companyname-s3logs` bucket. You can configure `com-companyname-s3logs` bucket to delete log files permanently after certain period (for example 1 or 7 days). Check [Object Lifecycle Management](http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in Amazon S3 Developer Guide.
 
