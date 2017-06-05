@@ -125,9 +125,7 @@ Follow below steps to enable CloudWatch metrics for bucket
 
 2. Enable logging on `com-companyname-mybucket` bucket
    
-   For information on how to enable bucket logging, see [Enabling Logging
-   Using the Console]
-   (http://docs.aws.amazon.com/AmazonS3/latest/dev/enable-logging-console.html).
+   For information on how to enable bucket logging, see [Enabling Logging Using the Console](http://docs.aws.amazon.com/AmazonS3/latest/dev/enable-logging-console.html).
    
    IMPORTANT: Set `com-companyname-s3logs` as **Target Bucket** for log
    objects. Specify `com-companyname-mybucket/` as **Target
