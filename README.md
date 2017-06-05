@@ -151,7 +151,7 @@ A: As with everything on AWS. You pay for what you use. The monthly price of dep
 
 **Q: My logs bucket (`com-companyname-s3logs`) is growing really big, I do not need my S3 logs to be stored for such a long time because it's expensive.**
 
-A: Enable S3 lifecycle rules for `com-companyname-s3logs` bucket. You can configure `com-companyname-s3logs` bucket to delete log files permanently after certain period (for example 1 or 7 days). Check [Object Lifecycle Management] (http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in Amazon S3 Developer Guide.
+A: Enable S3 lifecycle rules for `com-companyname-s3logs` bucket. You can configure `com-companyname-s3logs` bucket to delete log files permanently after certain period (for example 1 or 7 days). Check [Object Lifecycle Management](http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in Amazon S3 Developer Guide.
 
 ## Contributing
 <a name="contributing"/>
