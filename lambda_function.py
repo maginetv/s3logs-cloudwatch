@@ -1,20 +1,17 @@
-from __future__ import print_function
-
 import json
 import urllib
 import boto3
 import re
-import string
 import logging
-import ConfigParser
+import configparser
 from collections import defaultdict
 from datetime import datetime, timedelta
 
 LOGGER = logging.getLogger()
 LOGGER.setLevel(logging.INFO)
 
-CONFIG = ConfigParser.SafeConfigParser()
-CONFIG.readfp(open('configuration.ini'))
+CONFIG = configparser.ConfigParser()
+CONFIG.read_file(open('configuration.ini'))
 
 CW_NAMESPACE = CONFIG.get('cloudwatch', 'namespace')
 ROUND_TIMESTAMP_TO = CONFIG.getint('cloudwatch', 'round_timestamp_to_min') * 60
@@ -112,8 +109,8 @@ class S3Log:
             s3_client = boto3.client('s3')
             response = s3_client.get_object(Bucket=bucket, Key=key)
         except Exception as e:
-            print(e)
-            print('Error getting object {} from bucket {}.'
+            LOGGER.error(e)
+            LOGGER.error('Error getting object {} from bucket {}.'
                   'Make sure they exist and your bucket is in '
                   'the same region as this function.'.format(key, bucket))
             raise e
@@ -146,7 +143,7 @@ class S3Log:
         )
 
         for line in response['Body'].read().splitlines():
-            match = s3_logline_regex.match(line)
+            match = s3_logline_regex.match(line.decode('utf-8'))
             dp = match.groupdict()
             dp['TIMESTAMP_LOWRES'] = round_time(
                 datetime.strptime(dp['TIME'], '%d/%b/%Y:%X +0000'),
@@ -193,9 +190,9 @@ class CloudWatchMetricsBuffer:
             prev['Maximum'] = max(value, prev['Maximum'])
 
     def flush(self):
-        d = self.metric_data.values()
+        d = list(self.metric_data.values())
         # AWS Limit: Max 20 MetricDatum items in one PutMetricData request
-        for x in xrange(0, len(d), 20):
+        for x in range(0, len(d), 20):
             try:
                 self.cloudwatch_client.put_metric_data(
                     Namespace=self.namespace,
@@ -203,7 +200,8 @@ class CloudWatchMetricsBuffer:
                 )
             except Exception as e:
                 # CloudWatch client retries with exponential backoff
-                print('Error putting metric data. ERROR: {}'.format(e))
+                LOGGER.error('Error putting metric data. ERROR: {}'.format(e))
+                raise e
             self.requests_counter += 1
 
     def get_requests_counter(self):
@@ -215,10 +213,10 @@ class CloudWatchMetricsBuffer:
 def lambda_handler(event, context):
     LOGGER.info("Received event: {}".format(event))
     logs_bucket = event['Records'][0]['s3']['bucket']['name']
-    key = urllib.unquote_plus(
+    key = urllib.parse.unquote_plus(
         event['Records'][0]['s3']['object']['key']
-    ).decode('utf8')
-    source_bucket = string.split(key, '/', 1)[0]
+    )
+    source_bucket = key.split('/', 1)[0]
 
     s3log = S3Log(logs_bucket, key)
     cwmb = CloudWatchMetricsBuffer(
@@ -234,9 +232,6 @@ def lambda_handler(event, context):
     for mc in METRICS_CONFIG:
         filtered_datapoints = s3log.filtered_datapoints(
             filter_function=mc['FilterFunction'])
-
-        if len(filtered_datapoints) == 0:
-            continue
 
         for datapoint in filtered_datapoints:
             timestamp_iso = datapoint['TIMESTAMP_LOWRES_ISO']

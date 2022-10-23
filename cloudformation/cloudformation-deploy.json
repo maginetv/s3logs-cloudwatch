@@ -140,7 +140,7 @@
             "Ref": "DeploymentPackageS3Key"
           }
         },
-        "Runtime": "python2.7",
+        "Runtime": "python3.9",
         "MemorySize": { "Ref": "LambdaFunctionMemorySize" },
         "Timeout": { "Ref": "LambdaFunctionTimeout" }
       }
