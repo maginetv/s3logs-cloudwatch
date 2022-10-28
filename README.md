@@ -126,8 +126,7 @@ Follow below steps to enable CloudWatch metrics for bucket
 2. Enable logging on `com-companyname-mybucket` bucket
    
    For information on how to enable bucket logging, see [Enabling Logging
-   Using the Console]
-   (http://docs.aws.amazon.com/AmazonS3/latest/dev/enable-logging-console.html).
+   Using the Console](http://docs.aws.amazon.com/AmazonS3/latest/dev/enable-logging-console.html).
    
    IMPORTANT: Set `com-companyname-s3logs` as **Target Bucket** for log
    objects. Specify `com-companyname-mybucket/` as **Target
@@ -200,12 +199,12 @@ need my S3 logs to be stored for such a long time because it's expensive.**
 
 A: Enable S3 lifecycle rules for `com-companyname-s3logs` bucket. You can
 configure `com-companyname-s3logs` bucket to delete log files permanently after
-certain period (for example 1 or 7 days). Check [Object Lifecycle Management]
-(http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in
+certain period (for example 1 or 7 days). Check
+[Object Lifecycle Management](http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in
 Amazon S3 Developer Guide.
 
 
-## Contributing
+## Contributing
 <a name="contributing"/>
 
 Pull requests are very welcome if you feel like you would like to improve
