@@ -1,10 +1,8 @@
-import json
 import urllib
 import boto3
 import re
 import logging
 import configparser
-from collections import defaultdict
 from datetime import datetime, timedelta
 
 LOGGER = logging.getLogger()
@@ -110,9 +108,10 @@ class S3Log:
             response = s3_client.get_object(Bucket=bucket, Key=key)
         except Exception as e:
             LOGGER.error(e)
-            LOGGER.error('Error getting object {} from bucket {}.'
-                  'Make sure they exist and your bucket is in '
-                  'the same region as this function.'.format(key, bucket))
+            LOGGER.error(
+                'Error getting object {} from bucket {}.'
+                'Make sure they exist and your bucket is in '
+                'the same region as this function.'.format(key, bucket))
             raise e
 
         s3_logline_regex = re.compile(
@@ -247,8 +246,7 @@ def lambda_handler(event, context):
                     value=value,
                 )
 
-            if (mc.get('TotalRequestTime') and
-                datapoint['TOTAL_TIME'].isdigit()):
+            if (mc.get('TotalRequestTime') and datapoint['TOTAL_TIME'].isdigit()):
                 metric_name_suffix = 'TotalRequestTime'
                 value = int(datapoint['TOTAL_TIME'])
                 cwmb.add_metric_datapoint(
@@ -260,8 +258,7 @@ def lambda_handler(event, context):
                     value=value,
                 )
 
-            if (mc.get('TurnAroundTime') and
-                datapoint['TURN_AROUND_TIME'].isdigit()):
+            if (mc.get('TurnAroundTime') and datapoint['TURN_AROUND_TIME'].isdigit()):
                 metric_name_suffix = 'TurnAroundTime'
                 value = int(datapoint['TURN_AROUND_TIME'])
                 cwmb.add_metric_datapoint(
@@ -273,8 +270,7 @@ def lambda_handler(event, context):
                     value=value,
                 )
 
-            if (mc.get('ObjectSize') and
-                datapoint['OBJECT_SIZE'].isdigit()):
+            if (mc.get('ObjectSize') and datapoint['OBJECT_SIZE'].isdigit()):
                 metric_name_suffix = 'ObjectSize'
                 value = int(datapoint['OBJECT_SIZE'])
                 cwmb.add_metric_datapoint(
