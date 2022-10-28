@@ -1,0 +1,27 @@
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core >=3.7.1,<4"]
+
+[project]
+name = "s3logs-cloudwatch"
+version = "1.0.0"
+authors = [
+    {name = "Michal Gasek", email = "michal.gasek@magine.com"},
+]
+description = "AWS Lambda function to parse S3 server log files and export metrics to AWS CloudWatch."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+]
+dependencies = [
+    "boto3",
+]
+
+[tool.flit.module]
+name = "lambda_function"
